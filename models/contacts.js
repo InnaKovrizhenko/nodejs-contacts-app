@@ -65,14 +65,14 @@ const addContact = async (name, email, phone) => {
 };
 
 // Функція, яка повертає оновлений об'єкт доданого контакту.
-const updateContact = async (contactId, body) => {
+const updateContact = async (id, body) => {
   try {
     const allContacts = await listContacts();
-    const index = allContacts.findIndex((el) => el.id === contactId);
+    const index = allContacts.findIndex((el) => el.id === id);
     if (index === -1) {
       return null;
     }
-    allContacts[index] = { contactId, ...body };
+    allContacts[index] = { id, ...body };
     await fs.writeFile(contactsPath, JSON.stringify(allContacts, null, 2));
     return allContacts[index];
   } catch (error) {
